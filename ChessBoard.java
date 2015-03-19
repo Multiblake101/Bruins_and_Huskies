@@ -2,36 +2,45 @@
  * Grayson Sinclair
  * March 19, 2015
  * 
- * The class for a chessboard, keeps track of the 
+ * The class for a chess board, keeps track of the 
  * pieces accordingly. This board only keeps track
  * of a single char per space on the board, so any
  * value added to the board from the piece's toString
  * must be cast to a char.
  */
 
-public class ChessBoard implements RectangularBoard {
+public class ChessBoard {
+	// The size of the board's matrix
+	private static final int BOARD_WIDTH = 8;
+	private static final int BOARD_HEIGHT = 8;
 	// To define row of a board
-	static final String ALPHA = "ABCDEFGH";
+	private static final String ALPHA = "ABCDEFGH";
 	// Spots on the board, onto which pieces
 	// may be placed
-	private RectangularBoardPiece[][] spots;
+	private ChessPiece[][] spots;
+	private NullPiece nullPiece;
 	
 	// Create a generic board.
 	public ChessBoard(){
 		spots = new ChessPiece[BOARD_WIDTH][BOARD_HEIGHT];
 		
-		ChessPiece placeHolder = new ChessPiecePlaceHolder();
+		nullPiece = new NullPiece();
 		for (int i = 0; i < BOARD_WIDTH; i++)
 			for (int j = 0; j < BOARD_HEIGHT; j++)
-				spots[i][j] = placeHolder;
+				spots[i][j] = nullPiece;
 				// The above is a lazy way to avoid null pointer exceptions
+	}
+	
+	// Getter for the pointer to the nullPiece
+	public NullPiece getNullPiece() {
+		return nullPiece;
 	}
 	
 	// Print which piece is at the specified coordinate
 	// Takes coordinates as two integer values x and y
 	// Will throw IllegalArgumentException if coordinates
 	// are out of bounds
-	public RectangularBoardPiece getPiece(int x, int y) {
+	public ChessPiece getPiece(int x, int y) {
 		if (!checkBounds(x, y)) 
 			throw new IllegalArgumentException();
 		return spots[x][y];
@@ -39,7 +48,7 @@ public class ChessBoard implements RectangularBoard {
 	
 	// Like getPiece, but inserts a specified piece
 	// into a spot on the board at specified coordinates
-	public void putPiece(RectangularBoardPiece piece, int x, int y) {
+	public void putPiece(ChessPiece piece, int x, int y) {
 		if (!checkBounds(x, y)) 
 			throw new IllegalArgumentException();
 		spots[x][y] = piece;
@@ -73,9 +82,9 @@ public class ChessBoard implements RectangularBoard {
 				board_string += (8 - i);
 			board_string += '|';
 			for (int j = 0; j < adjustedWidth; j++) 
-				board_string += ((ChessPiece) spots[j][i]).getSymbol() + " ";
+				board_string += (spots[j][i]).getSymbol() + " ";
 			board_string += 
-					((ChessPiece) spots[adjustedWidth][i]).getSymbol() + "|\n";
+					(spots[adjustedWidth][i]).getSymbol() + "|\n";
 		}
 		if (lineNumbers)
 			for (int i = 0; i < BOARD_WIDTH; i++) 

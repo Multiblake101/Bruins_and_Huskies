@@ -9,9 +9,9 @@
 public class Game {
 	public static void main(String[] args) {
 		ChessBoard b = new ChessBoard();
-		b.putPiece('K', 4, 0);
-		b.putPiece('Q', 5, 7);
-		b.putPiece('P', 7, 6);
+		ChessPiece piece1 = new ChessPiece(b, false, 4, 2);
+		ChessPiece piece2 = new ChessPiece(b, true, 0, 0);
+		ChessPiece piece3 = new ChessPiece(b, true, 6, 3);
 		System.out.println(b.toString(true));
 	}
 }
