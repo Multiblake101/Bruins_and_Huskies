@@ -19,18 +19,31 @@
 
 class ChessPiece {
     private ChessBoard board;
+    private boolean color;
+    private char representation;
     private int x;
     private int y;
 
     // Associates a piece with a space on the board
-    // Takes the board to be associated with, and the 
-    // coordinates to be placed at. 
-    public ChessPiece(ChessBoard board, int x, int y) {
+    // Takes the board to be associated with, the 
+    // coordinates to be placed at, a character to 
+    // represent the piece, and a boolean to represent 
+    // the color. (White is true, black is false.)
+    public ChessPiece(ChessBoard board, boolean isWhite, char rep, int x, int y) {
         this.x = x;
         this.y = y;
         this.board = board;
+        this.color = isWhite;
+        this.representation = rep;
 
         this.move(this.x, this.y);
+    }
+
+    // Returns the piece's representation as 
+    // a string, for use when the board constructs
+    // an image of the game's current state. 
+    public String toString() {
+        return "" + representation;
     }
 
     // Takes the coordinates to be moved to,
