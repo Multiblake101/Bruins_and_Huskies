@@ -16,17 +16,16 @@ class GameClient {
 
         String userResponse = input.nextLine();
         while (!userResponse.equals("0")) {
-            interpretResponse(userResponse);
+            if (userResponse.equals("1")) {
+                ChessGame game = new ChessGame();
+                game.main(args); // args is just a placeholder
+            } else {
+                System.out.println("Please choose a valid option:");
+                printOptions();
+            }
+
             userResponse = input.nextLine();
         }
-    }
-
-    public static void interpretResponse(String res) {
-        if (res.equals("1")) {
-            ChessGame game = new ChessGame();
-            game.main();
-        } else 
-            printOptions();
     }
 
     public static void printOptions() {

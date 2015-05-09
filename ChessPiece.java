@@ -29,12 +29,18 @@ class ChessPiece {
     // coordinates to be placed at, a character to 
     // represent the piece, and a boolean to represent 
     // the color. (White is true, black is false.)
+    // If the piece is black, the representation will 
+    // self-capitalize. Else, it will uppercase. This 
+    // is just to help distinguish them. 
     public ChessPiece(ChessBoard board, boolean isWhite, char rep, int x, int y) {
         this.x = x;
         this.y = y;
         this.board = board;
         this.color = isWhite;
-        this.representation = rep;
+        if (isWhite) 
+            this.representation = Character.toUpperCase(rep);
+        else 
+            this.representation = Character.toLowerCase(rep);
 
         this.move(this.x, this.y);
     }
@@ -47,7 +53,7 @@ class ChessPiece {
     }
 
     // Takes the coordinates to be moved to,
-    // will kill any pieces that were previously
+    // will kill any piece that was previously
     // at those coordinates. Board will throw
     // IndexOutOfBoundsError if the coordinates
     // are outside the range of the board.
@@ -80,4 +86,5 @@ class ChessPiece {
     // TODO: Add revive method to put dead pieces 
     // back on the board (Will be necessary to circumvent
     // the piece logic in more complex pieces)
+    // NOTE (EDIT): maybe this should go in ChessGame or GameClient
 }

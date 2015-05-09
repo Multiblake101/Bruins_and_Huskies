@@ -12,22 +12,20 @@ class ChessGame {
     // true  ->  white
     // false ->  black
     public static final boolean COLOR = true;
-    
-    // Declarations of al the piece's character
-    // representations. These are how the piece
-    // will appear on the printed board. 
-    public static final char PAWN = 'P';
-    public static final char ROOK = 'R';
-    public static final char KNIGHT = 'N';
-    public static final char BISHOP = 'B';
-    public static final char QUEEN = 'Q';
-    public static final char KING = 'K';
+
+    // Pieces to be arranged on the board from
+    // lowest x to highest x. First character 
+    // in the array will completely populate the
+    // line one y coordinate towards the middle of 
+    // the board with respect to the rest of the pieces
+    public static final char[] PIECES = {
+        'P', 'R', 'K', 'B', 'Q', 'K', 'B', 'K', 'R'
+    };
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        ChessBoard board = new ChessBoard();
-        // TODO: Add all pieces, black and white
-
+        ChessBoard board = new ChessBoard(PIECES);
+        
         // TODO: Add an interpreter for user input
         // that returns boolean for gameFinished
         // and moves the pieces/evaluates whether 
